@@ -1,11 +1,11 @@
 # Angular fullPage.js
-Angular directive for use the jQuery fullPage.js library on Angular.js v1.x
+Angular directive for use the [jQuery fullPage.js library](https://github.com/alvarotrigo/fullPage.js) on Angular.js v1.x
 
 
 ---------------------
 
 
-This code is a completely adapted version of fullPage.js library developed by Alvaro Trigo (https://github.com/alvarotrigo/fullPage.js) for working with Angular.js v1.X.
+This code is a completely adapted version of [fullPage.js library developed by Alvaro Trigo](https://github.com/alvarotrigo/fullPage.js) for working with Angular.js v1.X.
 
 Note: this library is an alpha version. There is a lot of errors in the code.
 
@@ -37,7 +37,7 @@ You also have to include the CSS stylesheet of the original jQuery library
 
 
 ## First steps ##
-The use of the Angular fullPage directive is similar to the use of the original jQuery fullPage.js library of Alvaro Trigo (https://github.com/alvarotrigo/fullPage.js). The only diference is that for define a full-page div, you define a attribute, not a class:
+The use of the Angular fullPage directive is similar to the use of [the original jQuery fullPage.js library of Alvaro Trigo](https://github.com/alvarotrigo/fullPage.js). The only diference is that for define a full-page div, you define a attribute, not a class:
 ```html
 <div full-page></div>
 ```
@@ -52,3 +52,7 @@ There is a complete example:
   </div>
 </div>
 ```
+
+
+## What's next? ##
+For further information and complete documentation, you have to access the official site of the original jQuery project: http://alvarotrigo.com/fullPage/
