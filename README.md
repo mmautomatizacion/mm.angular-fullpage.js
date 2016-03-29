@@ -13,7 +13,7 @@ Note: this library is an alpha version. There is a lot of errors in the code.
 
 **¡¡Donate for this project!!**
 
-[![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9MCU8ESDM26KC&lc=ES&item_name=Manuel%20Mart%c3%adnez%20Automatizaci%c3%b3n%20y%20Pesaje%20Industrial%2c%20S%2eL%2eU%2e&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
+[![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9MCU8ESDM26KC&lc=ES&item_name=angular%2dfullpage%2ejs&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
 **¡¡Donate for original jQuery project (Alvaro Trigo)¡¡**
 
