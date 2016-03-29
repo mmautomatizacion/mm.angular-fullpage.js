@@ -10,17 +10,16 @@ This code is a completely adapted version of [fullPage.js library developed by A
 Note: this library is an alpha version. There is a lot of errors in the code.
 
 
+---------------------
 
 **Donate for this project!!**
+
 
 [![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9MCU8ESDM26KC&lc=ES&item_name=angular%2dfullpage%2ejs&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
 
 **Donate for original jQuery project (Alvaro Trigo)!!**
 
 [![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BEK5JQCQMED4J&lc=GB&item_name=fullPage%2ejs&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
-
-
-
 
 
 ## Instalation ##
@@ -56,3 +55,11 @@ There is a complete example:
 
 ## What's next? ##
 For further information and complete documentation, you have to access the official site of the original jQuery project: http://alvarotrigo.com/fullPage/
+
+
+
+## Keep in mind ##
+ - This project contains the complete code of the original modified for work with Angular. **Is not necessary (and not recommended) to include the jQuery original library**
+ - Angular fullPage.js is not compatible with Angular routing (ngRoute, uiRoute...)
+ - You *can* use **HTML5 mode**
+ - And so important, **IT'S AN QUICK AND CRUDE ALPHA VERSION**. Don't forget it.
