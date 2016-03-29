@@ -1,0 +1,24 @@
+{
+  "name": "angular-fullpage.js",
+  "version": "0.0.1",
+  "description": "Angular directive for use the jQuery fullPage.js library on Angular.js v1.x",
+  "main": "angular-fullpage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmautomatizacion/angular-fullpage.js.git"
+  },
+  "keywords": [
+    "angular",
+    "fullpage",
+    "fullpage.js"
+  ],
+  "author": "Manuel Martínez Automatización y Pesaje Industrial, S.L.U.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmautomatizacion/angular-fullpage.js/issues"
+  },
+  "homepage": "https://github.com/mmautomatizacion/angular-fullpage.js#readme"
+}
