@@ -59,7 +59,7 @@ For further information and complete documentation, you have to access the offic
 
 
 ## Keep in mind ##
- - This project contains the complete code of the original modified for work with Angular. **Is not necessary (and not recommended) to include the jQuery original library**
- - Angular fullPage.js is not compatible with Angular routing (ngRoute, uiRoute...)
- - You *can* use **HTML5 mode**
+ - This project contains the complete code of the original modified for work with Angular. **Is not necessary (and not recommended) to include the jQuery original library**.
+ - Angular fullPage.js is not compatible with Angular routing (ngRoute, uiRoute...).
+ - You *can* use **HTML5 mode**.
  - And so important, **IT'S AN QUICK AND CRUDE ALPHA VERSION**. Don't forget it.
