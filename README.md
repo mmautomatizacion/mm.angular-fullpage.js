@@ -5,7 +5,6 @@ Angular directive for use the jQuery fullPage.js library on Angular.js v1.x
 ---------------------
 
 
-# introduction #
 This code is a completely adapted version of fullPage.js library developed by Alvaro Trigo (https://github.com/alvarotrigo/fullPage.js) for working with Angular.js v1.X.
 
 Note: this library is an alpha version. There is a lot of errors in the code.
