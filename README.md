@@ -1,4 +1,4 @@
-# angular-fullpage.js
+# Angular fullPage.js
 Angular directive for use the jQuery fullPage.js library on Angular.js v1.x
 
 
@@ -8,6 +8,20 @@ Angular directive for use the jQuery fullPage.js library on Angular.js v1.x
 This code is a completely adapted version of fullPage.js library developed by Alvaro Trigo (https://github.com/alvarotrigo/fullPage.js) for working with Angular.js v1.X.
 
 Note: this library is an alpha version. There is a lot of errors in the code.
+
+
+
+**¡¡Donate for this project!!**
+
+[![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=9MCU8ESDM26KC&lc=ES&item_name=Manuel%20Mart%c3%adnez%20Automatizaci%c3%b3n%20y%20Pesaje%20Industrial%2c%20S%2eL%2eU%2e&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
+
+**¡¡Donate for original jQuery project (Alvaro Trigo)¡¡**
+
+[![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BEK5JQCQMED4J&lc=GB&item_name=fullPage%2ejs&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
+
+
+
+
 
 ## Instalation ##
 Only you have to do is include the library into the HTML. For do that, download the file and include like another JS code:
@@ -20,6 +34,7 @@ You also have to include the CSS stylesheet of the original jQuery library
 ```html
 <link type="text/css" rel="stylesheet" href="jquery.fullPage.css">
 ```
+
 
 ## First steps ##
 The use of the Angular fullPage directive is similar to the use of the original jQuery fullPage.js library of Alvaro Trigo (https://github.com/alvarotrigo/fullPage.js). The only diference is that for define a full-page div, you define a attribute, not a class:
