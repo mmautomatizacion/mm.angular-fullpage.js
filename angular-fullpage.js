@@ -1711,7 +1711,6 @@
             * (a way to detect back history button as we play with the hashes on the URL)
             */
             function hashChangeHandler(){
-                console.log("HashChangeHandler");
                 if(!isScrolling && !options.lockAnchors){
                     var section = $location.path().replace('/', '');
                     var slide = $location.hash();
