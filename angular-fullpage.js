@@ -991,7 +991,7 @@
                 var currentSection;
 
                 if(!options.autoScrolling || options.scrollBar){
-                    var currentScroll = $window.scrollTop();
+                    var currentScroll = $window.pageYOffset;
                     var scrollDirection = getScrollDirection(currentScroll);
                     var visibleSectionIndex = 0;
                     var screen_mid = currentScroll + ($window.innerHeight / 2.0);
@@ -1087,9 +1087,9 @@
                 var bottom = top + $window.innerHeight;
 
                 if(movement == 'up'){
-                    return bottom >= ($window.scrollTop() + $window.innerHeight);
+                    return bottom >= ($window.pageYOffset + $window.innerHeight);
                 }
-                return top <= $window.scrollTop();
+                return top <= $window.pageYOffset;
             };
 
             /**
@@ -1455,7 +1455,7 @@
                 };
 
                 //quiting when destination scroll is the same as the current one
-                if((v.activeSection.is(element) && !isResizing) || (options.scrollBar && $window.scrollTop() === v.dtop && !element.hasClass(AUTO_HEIGHT) )){ return; }
+                if((v.activeSection.is(element) && !isResizing) || (options.scrollBar && $window.pageYOffset === v.dtop && !element.hasClass(AUTO_HEIGHT) )){ return; }
 
                 if(v.activeSlide.length){
                     var slideAnchorLink = v.activeSlide.data('anchor');
