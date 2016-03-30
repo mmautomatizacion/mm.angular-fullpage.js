@@ -41,7 +41,7 @@ The use of the Angular fullPage directive is similar to the use of [the original
 <div full-page></div>
 ```
 
-There is a complete example:
+Here a complete example:
 ```html
 <div full-page>
   <div class='section' data-anchor='section1'></div>
