@@ -1,5 +1,5 @@
 /*!
- * angular-fullPage 0.0.1
+ * angular-fullPage 0.1.0
  * https://github.com/mmautomatizacion/angular-fullpage.js.git
  * @license MIT licensed
  *
@@ -17,7 +17,10 @@
         .directive('fullPage', fullPage);
 
 
-    function fullPage($window, $document, $location, $timeout, $anchorScroll) {
+    fullPage.$inject = ['$window', '$document', '$location', '$timeout'];
+
+
+    function fullPage($window, $document, $location, $timeout) {
         var directive = {
             link: link,
             restrict: 'A'
@@ -304,6 +307,7 @@
             //TO BE REMOVED in future versions. Maintained temporaly for backwards compatibility.
             $.extend($.easing,{ easeInQuart: function (x, t, b, c, d) { return c*(t/=d)*t*t*t + b; }});
 
+
             /**
             * Sets the autoScroll option.
             * It changes the scroll bar visibility and the history of the site as a result.
@@ -586,7 +590,7 @@
                     $(SECTION_NAV_SEL).show();
                     $body.removeClass(RESPONSIVE);
                 }
-            }
+            };
 
             //flag to avoid very fast sliding for landscape sliders
             var slideMoving = false;
@@ -656,7 +660,7 @@
                         scrollToAnchor();
                     });
                 }
-            }
+            };
 
             function bindEvents(){
                 angular.element($window)
@@ -704,7 +708,7 @@
                         FP.setMouseWheelScrolling(true);
                     });
                 }
-            }
+            };
 
             /**
             * Setting options from DOM elements if they are not provided.
@@ -723,7 +727,7 @@
                         return $(this).data('tooltip').toString();
                     }).get();
                 }
-            }
+            };
 
             /**
             * Works over the DOM structure to set it up for the current fullpage optionss.
@@ -783,7 +787,7 @@
                 }else{
                     afterRenderActions();
                 }
-            }
+            };
 
             /**
             * Styles the horizontal slides for a section.
@@ -824,7 +828,7 @@
                 }else{
                     slides.eq(0).addClass(ACTIVE);
                 }
-            }
+            };
 
             /**
             * Styling vertical sections
@@ -852,7 +856,7 @@
                 if (typeof options.anchors[index] !== 'undefined') {
                     section.attr('data-anchor', options.anchors[index]);
                 }
-            }
+            };
 
             /**
             * Sets the data-anchor attributes to the menu elements and activates the current one.
@@ -869,7 +873,7 @@
                 if(options.menu && options.css3 && $(options.menu).closest(WRAPPER_SEL).length){
                     $(options.menu).appendTo($body);
                 }
-            }
+            };
 
             /**
             * Adds internal classes to be able to provide customizable selectors
@@ -883,7 +887,7 @@
                 $(options.slideSelector).each(function(){
                     $(this).addClass(SLIDE);
                 });
-            }
+            };
 
             /**
             * Creates the control arrows for the given section
@@ -899,7 +903,7 @@
                 if(!options.loopHorizontal){
                     section.find(SLIDES_ARROW_PREV_SEL).hide();
                 }
-            }
+            };
 
             /**
             * Creates a vertical navigation bar.
@@ -937,7 +941,7 @@
 
                 //activating the current active section
                 $(SECTION_NAV_SEL).find('li').eq($(SECTION_ACTIVE_SEL).index(SECTION_SEL)).find('a').addClass(ACTIVE);
-            }
+            };
 
             /**
             * Creates the slim scroll scrollbar for the sections and slides inside them.
@@ -956,7 +960,7 @@
 
                 });
                 afterRenderActions();
-            }
+            };
 
             /**
             * Actions and callbacks to fire afterRender
@@ -1071,7 +1075,7 @@
                         }, options.fitToSectionDelay);
                     }
                 }
-            }
+            };
 
             /**
             * Determines whether the active section has seen in its whole or not.
@@ -1084,7 +1088,7 @@
                     return bottom >= ($window.scrollTop() + $window.innerHeight);
                 }
                 return top <= $window.scrollTop();
-            }
+            };
 
             /**
             * Gets the directon of the the scrolling fired by the scroll event.
@@ -1095,7 +1099,7 @@
                 lastScroll = currentScroll;
 
                 return direction;
-            }
+            };
 
             /**
             * Determines the way of scrolling up or down:
@@ -1126,7 +1130,7 @@
                     // moved up/down
                     scrollSection();
                 }
-            }
+            };
 
 
             var touchStartY = 0;
@@ -2813,6 +2817,6 @@
             function showError(type, text){
                 console && console[type] && console[type]('fullPage: ' + text);
             }
-        };
+        };        
     }
 })();
