@@ -14,13 +14,15 @@
 
     angular
         .module('fullpage.js', [])
+        .provider('fullPageConfig', fullPageConfig)
         .directive('fullPage', fullPage);
 
 
-    fullPage.$inject = ['$window', '$document', '$location', '$timeout'];
+
+    fullPage.$inject = ['fullPageConfig', '$window', '$document', '$location', '$timeout'];
 
 
-    function fullPage($window, $document, $location, $timeout) {
+    function fullPage(fullPageConfig, $window, $document, $location, $timeout) {
         var directive = {
             link: link,
             restrict: 'A'
@@ -152,7 +154,7 @@
                 }
             };
 
-            var options = new Object();
+            var options = fullPageConfig.options;
 
             // keeping central set of classnames and selectors
             var WRAPPER =               'fullpage-wrapper';
@@ -2818,5 +2820,16 @@
                 console && console[type] && console[type]('fullPage: ' + text);
             }
         };        
+    }
+
+
+    function fullPageConfig() {
+        this.setConfig = function(options) {
+            this.options = options;
+        };
+
+        this.$get = function () {
+            return this;
+        };
     }
 })();
