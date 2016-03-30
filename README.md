@@ -52,6 +52,27 @@ Here a complete example:
 </div>
 ```
 
+## Configure options of fullPage.js ##
+For configure the behaviour of Angular fullPage.js we can use a config provider, named 'fullPageConfigProvider', and define the options object throw 'setConfig' function. Here's an example:
+```js
+(function() {
+	'use strict';
+
+	angular
+		.module('app')
+		.config(function(fullPageConfigProvider) {
+			fullPageConfigProvider.setConfig({
+				scrollBar: true,
+				sectionSelector: '.fp_section',
+        		slideSelector: '.fp_slide',
+			});
+       	});
+
+})();
+```
+
+You can find all the possible options to configure in the [original jQuery project readme](https://github.com/alvarotrigo/fullPage.js#initialization).
+
 
 ## What's next? ##
 For further information and complete documentation, you have to access the official site of the original jQuery project: http://alvarotrigo.com/fullPage/
