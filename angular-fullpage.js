@@ -1,5 +1,5 @@
 /*!
- * angular-fullPage 0.1.0
+ * angular-fullPage 0.1.3
  * https://github.com/mmautomatizacion/angular-fullpage.js.git
  * @license MIT licensed
  *
@@ -1816,18 +1816,9 @@
 
             //Scrolls the slider to the given slide destination for the given section
             function slideBulletHandler(e){
-                console.log(this);
                 e.preventDefault();
                 var slides = element.closest(SECTION_SEL).find(SLIDES_WRAPPER_SEL);
                 var destiny = slides.find(SLIDE_SEL).eq(element.closest('li').index());
-
-                console.log(slides);
-                console.log(destiny);
-
-                console.log(SECTION_SEL);
-
-                console.log(element);
-
                 landscapeScroll(slides, destiny);
             }
 
@@ -2547,8 +2538,6 @@
             */
             function getMSPointer(){
                 var pointer;
-
-                $window.alert($window.PointerEvent);
 
                 //IE >= 11 & rest of browsers
                 if(window.PointerEvent){
