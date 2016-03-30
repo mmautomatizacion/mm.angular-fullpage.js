@@ -663,13 +663,13 @@
             };
 
             function bindEvents(){
+                //detecting any change on the URL to scroll to the given anchor link
+                //(a way to detect back history button as we play with the hashes on the URL)
+                scope.$on('$locationChangeSuccess', hashChangeHandler);
+
                 angular.element($window)
                     //when scrolling...
                     .on('scroll', scrollHandler)
-
-                    //detecting any change on the URL to scroll to the given anchor link
-                    //(a way to detect back history button as we play with the hashes on the URL)
-                    .on('hashchange', hashChangeHandler)
 
                     //when opening a new tab (ctrl + t), `control` won't be pressed when comming back.
                     .blur(blurHandler)
@@ -1711,6 +1711,7 @@
             * (a way to detect back history button as we play with the hashes on the URL)
             */
             function hashChangeHandler(){
+                console.log("HashChangeHandler");
                 if(!isScrolling && !options.lockAnchors){
                     var section = $location.path().replace('/', '');
                     var slide = $location.hash();
