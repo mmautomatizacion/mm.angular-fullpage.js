@@ -2322,8 +2322,6 @@
             function setState(slideIndex, slideAnchor, anchorLink, sectionIndex){
                 var sectionHash = '';
 
-
-
                 if(options.anchors.length && !options.lockAnchors){
 
                     //isn't it the first slide?
@@ -2361,8 +2359,9 @@
             function setUrl(section, slide){
                 $timeout(function() {
                     scope.$apply(function() {
+                        $location.url($location.path());
                         $location.path(section);
-                        $location.hash(slide);
+                        if (slide) { $location.hash(slide); }
                     });
                 }, 0, false);
             }
