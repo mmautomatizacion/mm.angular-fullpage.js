@@ -2653,12 +2653,12 @@
                 $timeout.cancel(scrollId);
                 $timeout.cancel(scrollId2);
 
-                $window
+                angular.element($window)
                     .off('scroll', scrollHandler)
                     .off('hashchange', hashChangeHandler)
                     .off('resize', resizeHandler);
 
-                $document
+                angular.element($document)
                     .off('click', SECTION_NAV_SEL + ' a')
                     .off('mouseenter', SECTION_NAV_SEL + ' li')
                     .off('mouseleave', SECTION_NAV_SEL + ' li')
