@@ -623,8 +623,10 @@
             var keydownId;
 
             // Init
-            init();
-            bindEvents();
+            $timeout(function() {
+                init();
+                bindEvents();
+            }, 0);
 
             function init(){
                 //if css3 is not supported, it will use jQuery animations
@@ -658,7 +660,7 @@
                 if (document.readyState === "complete") {
                     scrollToAnchor();
                 } else {
-                    $window.on('load', function() {
+                    angular.element($window).on('load', function() {
                         scrollToAnchor();
                     });
                 }
