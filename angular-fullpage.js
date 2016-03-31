@@ -623,10 +623,8 @@
             var keydownId;
 
             // Init
-            $timeout(function() {
-                init();
-                bindEvents();
-            }, 0);
+            init();
+            bindEvents();
 
             function init(){
                 //if css3 is not supported, it will use jQuery animations
