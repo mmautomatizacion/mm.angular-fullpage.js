@@ -1,9 +1,9 @@
 /*!
- * angular-fullPage 0.1.4
+ * angular-fullPage 0.2.0
  * https://github.com/mmautomatizacion/angular-fullpage.js.git
  * @license MIT licensed
  *
- * Based in jQuery fullPage 2.7.8 by Alvaro Trigo (https://github.com/alvarotrigo/fullPage.js)
+ * Based in jQuery fullPage 2.7.9 by Alvaro Trigo (https://github.com/alvarotrigo/fullPage.js)
 
  *
  * Copyright (C) 2016 Manuel Martínez Automatización y Pesaje Industrial and Alvaro Trigo
@@ -305,9 +305,6 @@
 
             //easeInOutCubic animation included in the plugin
             $.extend($.easing,{ easeInOutCubic: function (x, t, b, c, d) {if ((t/=d/2) < 1) return c/2*t*t*t + b;return c/2*((t-=2)*t*t + 2) + b;}});
-
-            //TO BE REMOVED in future versions. Maintained temporaly for backwards compatibility.
-            $.extend($.easing,{ easeInQuart: function (x, t, b, c, d) { return c*(t/=d)*t*t*t + b; }});
 
 
             /**
@@ -785,7 +782,7 @@
                         createSlimScrollingHandler();
                     }
                     //after DOM and images are loaded
-                    $window.on('load', createSlimScrollingHandler);
+                    angular.element($window).on('load', createSlimScrollingHandler);
                 }else{
                     afterRenderActions();
                 }
@@ -1395,11 +1392,12 @@
             * Returns the destination Y position based on the scrolling direction and
             * the height of the section.
             */
-            function getDestinationPosition(dest, element){
+            function getDestinationPosition(element){
+                var elemPosition = element.position();
 
                 //top of the desination will be at the top of the viewport
-                var position = dest.top;
-                var isScrollingDown =  dest.top > previousDestTop;
+                var position = elemPosition.top;
+                var isScrollingDown =  elemPosition.top > previousDestTop;
                 var sectionBottom = position - windowsHeight + element.outerHeight();
 
                 //is the destination element bigger than the viewport?
@@ -1410,8 +1408,8 @@
                     }
                 }
 
-                //sections equal or smaller than the viewport height AND scrolling down?
-                else if(isScrollingDown){
+                //sections equal or smaller than the viewport height && scrolling down? || is resizing and its in the last section
+                else if(isScrollingDown || (isResizing && element.is(':last-child'))){
                     //The bottom of the destination will be at the bottom of the viewport
                     position = sectionBottom;
                 }
@@ -1430,17 +1428,15 @@
             * Scrolls the site to the given element and scrolls to the slide if a callback is given.
             */
             function scrollPage(element, callback, isMovementUp){
-                var dest = element.position();
-                if(typeof dest === 'undefined'){ return; } //there's no element to scroll, leaving the function
+                if(typeof element === 'undefined'){ return; } //there's no element to scroll, leaving the function
 
-                var dtop = getDestinationPosition(dest, element);
+                var dtop = getDestinationPosition(element);
 
                 //local variables
                 var v = {
                     element: element,
                     callback: callback,
                     isMovementUp: isMovementUp,
-                    dest: dest,
                     dtop: dtop,
                     yMovement: getYmovement(element),
                     anchorLink: element.data('anchor'),
@@ -1582,8 +1578,7 @@
                 v.wrapAroundElements = v.activeSection;
 
                 // Recalculate animation variables
-                v.dest = v.element.position();
-                v.dtop = v.dest.top;
+                v.dtop = v.element.position().top;
                 v.yMovement = getYmovement(v.element);
 
                 return v;
@@ -1740,7 +1735,7 @@
 
                 var activeElement = $(':focus');
 
-                if(!activeElement.is('textarea') && !activeElement.is('input') && !activeElement.is('select') &&
+                if(!activeElement.is('textarea') && !activeElement.is('input') && !activeElement.is('select') && activeElement.attr('contentEditable') !== "true" && activeElement.attr('contentEditable') !== '' &&
                     options.keyboardScrolling && options.autoScrolling){
                     var keyCode = e.which;
 
@@ -2321,6 +2316,17 @@
             */
             function setState(slideIndex, slideAnchor, anchorLink, sectionIndex){
                 var sectionHash = '';
+
+                // Add to scope the info of current slide and section
+                scope.fpStatus = {
+                    slideIndex: slideIndex,
+                    slideAnchor: slideAnchor,
+                    anchorLink: anchorLink,
+                    sectionIndex: sectionIndex
+                };
+
+                scope.seccionActual = sectionIndex;
+                scope.slideActual = slideIndex;
 
                 if(options.anchors.length && !options.lockAnchors){
 
