@@ -1,5 +1,5 @@
 /*!
- * angular-fullPage 0.2.0
+ * angular-fullPage 0.2.1
  * https://github.com/mmautomatizacion/angular-fullpage.js.git
  * @license MIT licensed
  *
@@ -1691,8 +1691,9 @@
             * Scrolls to the anchor in the URL when loading the site
             */
             function scrollToAnchor(){
-                var section = $location.path().replace('/', '');
-                var slide = $location.hash();
+                var pathSplit = $location.path().split('/');
+                var section = pathSplit[1];
+                var slide = pathSplit[2];
 
                 if(section){  //if theres any #
                     if(options.animateAnchor){
@@ -1709,8 +1710,9 @@
             */
             function hashChangeHandler(){
                 if(!isScrolling && !options.lockAnchors){
-                    var section = $location.path().replace('/', '');
-                    var slide = $location.hash();
+                    var pathSplit = $location.path().split('/');
+                    var section = pathSplit[1];
+                    var slide = pathSplit[2];
 
                         //when moving to a slide in the first section for the first time (first time to add an anchor to the URL)
                         var isFirstSlideMove =  (typeof lastScrolledDestiny === 'undefined');
@@ -2325,9 +2327,6 @@
                     sectionIndex: sectionIndex
                 };
 
-                scope.seccionActual = sectionIndex;
-                scope.slideActual = slideIndex;
-
                 if(options.anchors.length && !options.lockAnchors){
 
                     //isn't it the first slide?
@@ -2365,9 +2364,11 @@
             function setUrl(section, slide){
                 $timeout(function() {
                     scope.$apply(function() {
+                        var path = section;
+                        if (slide) { path = path+'/'+slide }
+
                         $location.url($location.path());
-                        $location.path(section);
-                        if (slide) { $location.hash(slide); }
+                        $location.path(path);
                     });
                 }, 0, false);
             }
