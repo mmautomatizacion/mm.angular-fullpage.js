@@ -51,7 +51,7 @@ Here a complete example:
 ```
 
 ## Configure options of fullPage.js ##
-For configure the behaviour of Angular fullPage.js we can use a config provider, named 'fullPageConfigProvider', and define the options object throw 'setConfig' function. Here's an example:
+For configure the behaviour of Angular fullPage.js we can use a config provider, named 'fullPageConfig', and define the options object throw 'setConfig' function. Here's an example:
 ```js
 (function() {
 	'use strict';

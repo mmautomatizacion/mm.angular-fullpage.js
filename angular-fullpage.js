@@ -43,6 +43,7 @@
         var NO_TRANSITION =         'fp-notransition';
         var DESTROYED =             'fp-destroyed';
         var ENABLED =               'fp-enabled';
+        var VIEWING_PREFIX =        'fp-viewing';
         var ACTIVE =                'active';
         var ACTIVE_SEL =            '.' + ACTIVE;
         var COMPLETELY =            'fp-completely';
@@ -1856,7 +1857,7 @@
             function scrollToAnchor(){
                 var pathSplit = $location.path().split('/');
                 var section = decodeURIComponent(pathSplit[1]);
-                var slide = decodeUTIComponent(pathSplit[2]);
+                var slide = decodeURIComponent(pathSplit[2]);
 
 
                 if(section){  //if theres any #
@@ -1876,7 +1877,7 @@
                 if(!isScrolling && !options.lockAnchors){
                     var pathSplit = $location.path().split('/');
                     var section = decodeURIComponent(pathSplit[1]);
-                    var slide = decodeUTIComponent(pathSplit[2]);
+                    var slide = decodeURIComponent(pathSplit[2]);
 
                         //when moving to a slide in the first section for the first time (first time to add an anchor to the URL)
                         var isFirstSlideMove =  (typeof lastScrolledDestiny === 'undefined');
