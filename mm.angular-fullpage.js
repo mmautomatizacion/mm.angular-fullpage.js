@@ -1,6 +1,6 @@
 /*!
- * angular-fullPage 1.1.0
- * https://github.com/mmautomatizacion/angular-fullpage.js.git
+ * mm.angular-fullPage 1.1.1
+ * https://github.com/mmautomatizacion/mm.angular-fullpage.js.git
  * @license MIT licensed
  *
  * Based in jQuery fullPage 2.8.1 by Alvaro Trigo (https://github.com/alvarotrigo/fullPage.js)

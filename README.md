@@ -1,4 +1,4 @@
-# Angular fullPage.js
+# MM Angular fullPage.js
 Angular directive for use the [jQuery fullPage.js library](https://github.com/alvarotrigo/fullPage.js) on Angular.js v1.x
 
 
@@ -24,7 +24,7 @@ This code is a completely adapted version of [fullPage.js library developed by A
 Only you have to do is include the library into the HTML. For do that, download the file and include like another JS code:
 
 ```html
-<script type="text/javascript" src="angular-fullpage.min.js"></script>
+<script type="text/javascript" src="mm-angular-fullpage.min.js"></script>
 ```
 
 You also have to include the CSS stylesheet of the original jQuery library
