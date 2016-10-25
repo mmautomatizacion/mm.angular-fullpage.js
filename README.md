@@ -19,6 +19,8 @@ This code is a completely adapted version of [fullPage.js library developed by A
 
 [![Donate](https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=BEK5JQCQMED4J&lc=GB&item_name=fullPage%2ejs&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted)
 
+## Working example ##
+You can check a working example on our [company website, http://www.mmautomatizacion.com](http://mmautomatizacion.com)
 
 ## Instalation ##
 Only you have to do is include the library into the HTML. For do that, download the file and include like another JS code:
