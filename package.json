@@ -21,12 +21,12 @@
   "bugs": {
     "url": "https://github.com/mmautomatizacion/mm.angular-fullpage.js/issues"
   },
-<<<<<<< HEAD
-  "homepage": "https://github.com/mmautomatizacion/mm.angular-fullpage.js#readme"
-=======
-  "homepage": "https://github.com/mmautomatizacion/angular-fullpage.js#readme",
+  "homepage": "https://github.com/mmautomatizacion/mm.angular-fullpage.js#readme",
   "devDependencies": {
     "del": "^2.2.1",
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-jshint": "^1.1.0",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^2.0.10",
     "gulp-jshint": "^2.0.1",
@@ -35,6 +35,8 @@
     "gulp-uglify": "^1.5.4",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0"
+  },
+  "dependencies": {
+    "grunt-contrib-uglify": "^2.0.0"
   }
->>>>>>> a2dce775bd0d4759b8b0696b43cd7bdddfbadcc5
 }
