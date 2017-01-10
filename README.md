@@ -35,7 +35,7 @@ You also have to include the CSS stylesheet
 ```
 
 
-###Using Bower or NPM###
+### Using Bower or NPM ###
 
 You can install MM Angular FullPage.js using Bower or NPM:
 
