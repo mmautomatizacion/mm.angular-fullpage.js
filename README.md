@@ -22,7 +22,7 @@ This code is a completely adapted version of [fullPage.js library developed by A
 ## Working example ##
 You can check a working example on our [company website, http://www.mmautomatizacion.com](http://mmautomatizacion.com)
 
-## Instalation ##
+## Installation ##
 Only you have to do is include the library into the HTML. For do that, download the file and include like another JS code:
 
 ```html
@@ -33,6 +33,17 @@ You also have to include the CSS stylesheet
 ```html
 <link type="text/css" rel="stylesheet" href="mm.angular-fullpage.min.css">
 ```
+
+
+###Using Bower or NPM###
+
+You can install MM Angular FullPage.js using Bower or NPM:
+
+// Bower
+> bower install mm.angular-fullpage.js
+
+// NPM
+> npm install mm.angular-fullpage.js
 
 
 ## First steps ##
