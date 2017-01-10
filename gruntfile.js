@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 		uglify: {
 		    js: {
 		        src: ['./src/mm.angular-fullpage.js'],
-		        dest: './mm.angular-fullpage.min.js'
+		        dest: './dist/mm.angular-fullpage.min.js'
 		    }
 		},
         cssmin: {
@@ -16,7 +16,7 @@ module.exports = function(grunt) {
             },
             target: {
                 files: {
-                    './mm.angular-fullpage.min.css': './src/mm.angular-fullpage.css'
+                    './dist/mm.angular-fullpage.min.css': './src/mm.angular-fullpage.css'
                 }
             }
         }

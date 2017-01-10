@@ -7,7 +7,7 @@ var minifyCss = require('gulp-clean-css');
 gulp.task('css', function() {
     gulp.src('./src/mm.angular-fullpage.css')
         .pipe(sourcemaps.init())
-        .pipe(gulp.dest('./'))
+        .pipe(gulp.dest('./dist'))
         .pipe(minifyCss({
             compatibility: 'ie8',
             advanced: false,
@@ -15,19 +15,19 @@ gulp.task('css', function() {
         }))
         .pipe(rename({suffix: '.min'}))
         .pipe(sourcemaps.write('.')) 
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('js', function() {
     gulp.src('./src/mm.angular-fullpage.js')
         .pipe(sourcemaps.init())
-        .pipe(gulp.dest('./'))
+        .pipe(gulp.dest('./dist'))
         .pipe(uglify({
             preserveComments: 'license'
         }))
         .pipe(rename({suffix: '.min'}))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('./'));
+        .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('default', ['css', 'js']);
