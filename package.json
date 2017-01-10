@@ -2,7 +2,7 @@
   "name": "mm.angular-fullpage.js",
   "version": "1.2.0",
   "description": "Angular directive for use the jQuery fullPage.js library on Angular.js v1.x",
-  "main": "mm-angular-fullpage.js",
+  "main": "src/mm-angular-fullpage.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp"
@@ -22,6 +22,11 @@
     "url": "https://github.com/mmautomatizacion/mm.angular-fullpage.js/issues"
   },
   "homepage": "https://github.com/mmautomatizacion/mm.angular-fullpage.js#readme",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
   "devDependencies": {
     "del": "^2.2.1",
     "grunt": "^1.0.1",
