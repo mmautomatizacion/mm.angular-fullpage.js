@@ -39,6 +39,3 @@ jspm_packages
 
 # Intellij
 .idea
-
-# Build
-dist/

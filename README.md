@@ -39,10 +39,10 @@ You also have to include the CSS stylesheet
 
 You can install MM Angular FullPage.js using Bower or NPM:
 
-// Bower
+**Bower**
 > bower install mm.angular-fullpage.js
 
-// NPM
+**NPM**
 > npm install mm.angular-fullpage.js
 
 
