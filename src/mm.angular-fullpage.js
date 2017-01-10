@@ -1,5 +1,5 @@
 /*!
- * mm.angular-fullPage 1.3.0
+ * mm.angular-fullPage 1.3.1
  * https://github.com/mmautomatizacion/mm.angular-fullpage.js.git
  * @license MIT licensed
  *
