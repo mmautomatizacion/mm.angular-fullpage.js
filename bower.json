@@ -1,7 +1,10 @@
 {
   "name": "mm.angular-fullpage.js",
   "description": "Angular directive for use the jQuery fullPage.js library on Angular.js v1.x",
-  "main": "src/mm.angular-fullpage.js",
+  "main": [
+    "src/mm.angular-fullpage.js",
+    "src/mm.angular-fullpage.css",
+  ],
   "authors": [
     "Manuel Martínez Automatización y Pesaje Industrial",
     "S.L.U."
@@ -12,7 +15,7 @@
     "fullpage",
     "fullpage.js"
   ],
-  "homepage": "https://github.com/mmautomatizacion/angular-fullpage.js",
+  "homepage": "https://github.com/mmautomatizacion/mm.angular-fullpage.js.git",
   "ignore": [
     "**/.*",
     "node_modules",
