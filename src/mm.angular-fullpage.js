@@ -1,5 +1,5 @@
 /*!
- * mm.angular-fullPage 1.3.1
+ * mm.angular-fullPage 1.3.3
  * https://github.com/mmautomatizacion/mm.angular-fullpage.js.git
  * @license MIT licensed
  *
@@ -1630,8 +1630,8 @@
                     }
                 }
 
-                //sections equal or smaller than the viewport height && scrolling down? || is resizing and its in the last section
-                else if(isScrollingDown || (isResizing && element.is(':last-child'))){
+                //sections equal or smaller than the viewport height && scrolling down? || is resizing and its in the last section
+                else if(isScrollingDown || (isResizing && element.is(':last-child'))){
                     //The bottom of the destination will be at the bottom of the viewport
                     position = sectionBottom;
                 }
