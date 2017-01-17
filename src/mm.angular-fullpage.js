@@ -2671,10 +2671,15 @@
                 $timeout(function() {
                     scope.$apply(function() {
                         var path = section;
-                        if (slide) { path = path+'/'+slide }
+                        if (slide) { path = path+'/'+slide; }
 
-                        $location.url($location.path());
-                        $location.path(path);
+                        if(!options.recordHistory){
+                            $location.replace();
+                            $location.url(path);
+                        } else {
+                            $location.url($location.path());
+                            $location.path(path);
+                        }
                     });
                 }, 0, false);
             }
