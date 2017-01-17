@@ -23,7 +23,9 @@ This code is a completely adapted version of [fullPage.js library developed by A
 You can check a working example on our [company website, http://www.mmautomatizacion.com](http://mmautomatizacion.com)
 
 ## Installation ##
-Only you have to do is include the library into the HTML. For do that, download the file and include like another JS code:
+This library works with `jQuery`, so we have to include this library.
+
+Then, you have to include the *MM Angular fullPage.js* library into the HTML. Download the last release from github and include the source or minified file like another JS code:
 
 ```html
 <script type="text/javascript" src="mm.angular-fullpage.min.js"></script>
@@ -46,13 +48,20 @@ You can install MM Angular FullPage.js using Bower or NPM:
 > npm install mm.angular-fullpage.js
 
 
-## First steps ##
-The use of the Angular fullPage directive is similar to the use of [the original jQuery fullPage.js library of Alvaro Trigo](https://github.com/alvarotrigo/fullPage.js). The only diference is you only have to define a attribute in the full-page div, and no more:
-```html
-<div full-page></div>
+### Inject module ###
+For work, you may inject the directive to your angular app. The module name is `fullpage.js`:
+```js
+(function() {
+	'use strict';
+
+	angular
+		.module('app', ['fullpage.js']);
+})();
 ```
 
-Here a complete example:
+## First steps ##
+The use of the Angular fullPage directive is very similar to the use of [the original jQuery fullPage.js library of Alvaro Trigo](https://github.com/alvarotrigo/fullPage.js). You only have to use the `full-page` attribute into a div, and define sections and slides.
+
 ```html
 <div full-page>
   <div class='section' data-anchor='section1'></div>
@@ -62,6 +71,15 @@ Here a complete example:
   </div>
 </div>
 ```
+
+### Link to sections and slides ###
+For linking, we only have to use this href format: `#!SECTION/SLIDE`. I recommend to use the angular `ng-href` instead of original *href*.
+
+```html
+<a ng-href='#!firstPage'>
+<a ng-href='#!secondPage/2'>
+```
+
 
 ## Options. The Angular FullPage Config Provider ##
 For configure the behaviour of Angular fullPage.js we can use a config provider, named 'fullPageConfig', and define the options object throw 'setConfig' function. Here's an complete example with all options:
