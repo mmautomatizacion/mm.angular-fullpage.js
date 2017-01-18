@@ -30,6 +30,7 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+bower_components
 
 # Optional npm cache directory
 .npm
@@ -39,3 +40,6 @@ jspm_packages
 
 # Intellij
 .idea
+
+# MacOS DS_Store
+.DS_Store
