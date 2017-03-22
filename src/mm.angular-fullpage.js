@@ -1,9 +1,9 @@
 /*!
- * mm.angular-fullPage 1.3.4
+ * mm.angular-fullPage 1.3.6
  * https://github.com/mmautomatizacion/mm.angular-fullpage.js.git
  * @license MIT licensed
  *
- * Based in jQuery fullPage 2.9.2 by Alvaro Trigo (https://github.com/alvarotrigo/fullPage.js)
+ * Based in jQuery fullPage 2.9.4 by Alvaro Trigo (https://github.com/alvarotrigo/fullPage.js)
 
  *
  * Copyright (C) 2017 Manuel Martínez Automatización y Pesaje Industrial and Alvaro Trigo
@@ -358,7 +358,7 @@
 
             var FP = this;
 
-            // Create some defaults, extending them with any options that were provided
+            // Creating some defaults, extending them with any options that were provided
             options = $.extend({
                 //navigation
                 menu: false,
@@ -418,6 +418,12 @@
                 responsiveWidth: 0,
                 responsiveHeight: 0,
                 responsiveSlides: false,
+                parallax: false,
+                parallaxOptions: {
+                    type: 'reveal',
+                    percentage: 62,
+                    property: 'translate'
+                },
 
                 //Custom selectors
                 sectionSelector: SECTION_DEFAULT_SEL,
@@ -451,9 +457,12 @@
             var canScroll = true;
             var scrollings = [];
             var controlPressed;
+            var startingSection;
             var isScrollAllowed = {};
             isScrollAllowed.m = {  'up':true, 'down':true, 'left':true, 'right':true };
             isScrollAllowed.k = $.extend(true,{}, isScrollAllowed.m);
+            var MSPointer = getMSPointer();
+            FP.fitToSection = fitToSection;
     
             //timeouts
             var resizeId;
@@ -780,6 +789,7 @@
                 FP.moveTo = moveTo;
                 FP.moveSlideRight = moveSlideRight;
                 FP.moveSlideLeft = moveSlideLeft;
+                FP.fitToSection = fitToSection;
                 FP.reBuild = reBuild;
                 FP.setResponsive = setResponsive;
                 FP.destroy = destroy;
@@ -802,19 +812,9 @@
 
 
                 setOptionsFromDOM();
-
                 prepareDom();
                 setAllowScrolling(true);
-
                 setAutoScrolling(options.autoScrolling, 'internal');
-
-                //the starting point is a slide?
-                var activeSlide = $(SECTION_ACTIVE_SEL).find(SLIDE_ACTIVE_SEL);
-
-                //the active section isn't the first one? Is not the first slide of the first section? Then we load that section/slide by default.
-                if( activeSlide.length &&  ($(SECTION_ACTIVE_SEL).index(SECTION_SEL) !== 0 || ($(SECTION_ACTIVE_SEL).index(SECTION_SEL) === 0 && activeSlide.index() !== 0))){
-                    silentLandscapeScroll(activeSlide);
-                }
 
                 responsive();
 
@@ -993,7 +993,7 @@
                 //if the slide won't be an starting point, the default will be the first one
                 //the active section isn't the first one? Is not the first slide of the first section? Then we load that section/slide by default.
                 if( startingSlide.length &&  ($(SECTION_ACTIVE_SEL).index(SECTION_SEL) !== 0 || ($(SECTION_ACTIVE_SEL).index(SECTION_SEL) === 0 && startingSlide.index() !== 0))){
-                    silentLandscapeScroll(startingSlide);
+                    silentLandscapeScroll(startingSlide, 'internal');
                 }else{
                     slides.eq(0).addClass(ACTIVE);
                 }
@@ -1007,6 +1007,7 @@
                 if(!index && $(SECTION_ACTIVE_SEL).length === 0) {
                     section.addClass(ACTIVE);
                 }
+                startingSection = $(SECTION_ACTIVE_SEL);
 
                 section.css('height', windowsHeight + 'px');
 
@@ -1167,10 +1168,23 @@
                 playMedia(section);
                 options.scrollOverflowHandler.afterLoad();
 
-                $.isFunction( options.afterLoad ) && options.afterLoad.call(section, section.data('anchor'), (section.index(SECTION_SEL) + 1));
-                $rootScope.$emit("fp-afterLoad", {anchorLink: section.data('anchor'), index: (section.index(SECTION_SEL) + 1)});
+                if(isDestinyTheStartingSection()){
+                    $.isFunction( options.afterLoad ) && options.afterLoad.call(section, section.data('anchor'), (section.index(SECTION_SEL) + 1));
+                    $rootScope.$emit("fp-afterLoad", {anchorLink: section.data('anchor'), index: (section.index(SECTION_SEL) + 1)});
+                }
+
                 $.isFunction( options.afterRender ) && options.afterRender.call(container);
                 $rootScope.$emit("fp-afterRender");
+            }
+
+            /**
+            * Determines if the URL anchor destiny is the starting section (the one using 'active' class before initialization)
+            */
+            function isDestinyTheStartingSection(){
+                var anchors =  window.location.hash.replace('#', '').split('/');
+                var destinationSection = getSectionByAnchor(decodeURIComponent(anchors[0]));
+        
+                return !destinationSection.length || destinationSection.length && destinationSection.index() === startingSection.index();
             }
 
 
@@ -1272,21 +1286,28 @@
                         $timeout.cancel(scrollId2);
 
                         scrollId2 = $timeout(function(){
-                            //checking fitToSection again in case it was set to false before the timeout delay
-                            if(canScroll && options.fitToSection){
-                                //allows to scroll to an active section and
-                                //if the section is already active, we prevent firing callbacks
-                                if($(SECTION_ACTIVE_SEL).is(currentSection)){
-                                    isResizing = true;
-                                }
-                                scrollPage($(SECTION_ACTIVE_SEL));
-
-                                isResizing = false;
+                            //checking it again in case it changed during the delay
+                            if(options.fitToSection) {
+                                fitToSection();
                             }
                         }, options.fitToSectionDelay);
                     }
                 }
-            };
+            }
+
+            /**
+            * Fits the site to the nearest active section
+            */
+            function fitToSection(){
+                //checking fitToSection again in case it was set to false before the timeout delay
+                if(canScroll){
+                    //allows to scroll to an active section and
+                    //if the section is already active, we prevent firing callbacks
+                    isResizing = true;
+                    scrollPage($(SECTION_ACTIVE_SEL));
+                    isResizing = false;
+                }
+            }
 
             /**
             * Determines whether the active section has seen in its whole or not.
@@ -1697,7 +1718,10 @@
                     }
                     $rootScope.$emit("fp-onLeave", {index: v.leavingSection, nextIndex: (v.sectionIndex + 1), direction: v.yMovement});
                 }
-                stopMedia(v.activeSection);
+                //pausing media of the leaving section (if we are not just resizing, as destinatino will be the same one)
+                if(!v.localIsResizing){
+                    stopMedia(v.activeSection);
+                }
 
                 options.scrollOverflowHandler.beforeLeave();
                 element.addClass(ACTIVE).siblings().removeClass(ACTIVE);
@@ -1859,6 +1883,16 @@
             }
 
             /**
+            * Sets the value for the given attribute from the `data-` attribute with the same suffix
+            * ie: data-srcset ==> srcset  |  data-src ==> src
+            */
+            function setSrc(element, attribute){
+                element
+                    .attr(attribute, element.data(attribute))
+                    .removeAttr('data-' + attribute);
+            }
+
+            /**
             * Lazy loads image, video and audio elements.
             */
             function lazyLoad(destiny){
@@ -1869,10 +1903,14 @@
                 var panel = getSlideOrSection(destiny);
                 var element;
 
-                panel.find('img[data-src], source[data-src], audio[data-src], iframe[data-src]').each(function(){
+                panel.find('img[data-src], img[data-srcset], source[data-src], audio[data-src], iframe[data-src]').each(function(){
                     element = $(this);
-                    element.attr('src', element.data('src'));
-                    element.removeAttr('data-src');
+                    $.each(['src', 'srcset'], function(index, type){
+                        var attribute = element.attr('data-' + type);
+                        if(typeof attribute !== 'undefined' && attribute){
+                            setSrc(element, type);
+                        }
+                    });
 
                     if(element.is('source')){
                         element.closest('video').get(0).load();
@@ -2235,7 +2273,7 @@
                 }
 
                 //only changing the URL if the slides are in the current section (not for resize re-adjusting)
-                if(section.hasClass(ACTIVE)){
+                if(section.hasClass(ACTIVE) && !v.localIsResizing){
                     setState(v.slideIndex, v.slideAnchor, v.anchorLink, v.sectionIndex);
                 }
 
@@ -2534,10 +2572,10 @@
             * Gets a section by its anchor / index
             */
             function getSectionByAnchor(sectionAnchor){
-                //section
+                if(!sectionAnchor) return [];
                 var section = container.find(SECTION_SEL + '[data-anchor="'+sectionAnchor+'"]');
                 if(!section.length){
-                    section = $(SECTION_SEL).eq( (sectionAnchor -1) );
+                    section = $(SECTION_SEL).eq( sectionAnchor -1);
                 }
 
                 return section;
@@ -2826,16 +2864,14 @@
             */
             function addTouchHandler(){
                 if(isTouchDevice || isTouch){
-                    //Microsoft pointers
-                    var MSPointer = getMSPointer();
 
                     if(options.autoScrolling){
-                        $body.off('touchmove ' + MSPointer.move).on('touchmove ' + MSPointer.move, preventBouncing);
+                        $body.off(events.touchmove).on(events.touchmove, preventBouncing);
                     }
 
                     $(WRAPPER_SEL)
-                        .off('touchstart ' +  MSPointer.down).on('touchstart ' + MSPointer.down, touchStartHandler)
-                        .off('touchmove ' + MSPointer.move).on('touchmove ' + MSPointer.move, touchMoveHandler);
+                        .off(events.touchstart).on(events.touchstart, touchStartHandler)
+                        .off(events.touchmove).on(events.touchmove, touchMoveHandler);
                 }
             }
 
@@ -2844,12 +2880,10 @@
             */
             function removeTouchHandler(){
                 if(isTouchDevice || isTouch){
-                    //Microsoft pointers
-                    var MSPointer = getMSPointer();
 
                     $(WRAPPER_SEL)
-                        .off('touchstart ' + MSPointer.down)
-                        .off('touchmove ' + MSPointer.move);
+                        .off(events.touchstart)
+                        .off(events.touchmove);
                 }
             }
 
@@ -3013,8 +3047,10 @@
 
                 //loading all the lazy load content
                 container.find('img[data-src], source[data-src], audio[data-src], iframe[data-src]').each(function(){
-                    $(this).attr('src', $(this).data('src'));
-                    $(this).removeAttr('data-src');
+                    setSrc($(this), 'src');
+                });
+                container.find('img[data-srcset]').each(function(){
+                    setSrc($(this), 'srcset');
                 });
 
                 $(SECTION_NAV_SEL + ', ' + SLIDES_NAV_SEL +  ', ' + SLIDES_ARROW_SEL).remove();
@@ -3069,6 +3105,12 @@
                     $(this).replaceWith(this.childNodes);
                 });
 
+                //removing the applied transition from the fullpage wrapper
+                container.css({
+                    '-webkit-transition': 'none',
+                    'transition': 'none'
+                });
+
                 //scrolling the page to the top with no animation
                 $htmlBody.scrollTop(0);
 
@@ -3096,7 +3138,7 @@
             * Displays warnings
             */
             function displayWarnings(){
-                var extensions = ['fadingEffect', 'continuousHorizontal', 'scrollHorizontally', 'interlockedSlides', 'resetSliders', 'responsiveSlides', 'offsetSections', 'dragAndMove', 'scrollOverflowReset'];
+                var extensions = ['fadingEffect', 'continuousHorizontal', 'scrollHorizontally', 'interlockedSlides', 'resetSliders', 'responsiveSlides', 'offsetSections', 'dragAndMove', 'scrollOverflowReset', 'parallax'];
                 if($('html').hasClass(ENABLED)){
                     showError('error', 'Fullpage.js can only be initialized once and you are doing it multiple times!');
                     return;
