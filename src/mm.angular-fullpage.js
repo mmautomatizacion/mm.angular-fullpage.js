@@ -1,5 +1,5 @@
 /*!
- * mm.angular-fullPage 1.3.6
+ * mm.angular-fullPage 1.3.7
  * https://github.com/mmautomatizacion/mm.angular-fullpage.js.git
  * @license MIT licensed
  *
@@ -2286,6 +2286,7 @@
                 //if the site is not just resizing and readjusting the slides
                 if(!v.localIsResizing){
                     $.isFunction( options.afterSlideLoad ) && options.afterSlideLoad.call( v.destiny, v.anchorLink, (v.sectionIndex + 1), v.slideAnchor, v.slideIndex);
+                    $rootScope.$emit("fp-afterSlideLoad", {anchorLink: v.anchorLink, index: (v.sectionIndex + 1), slideAnchor: v.slideAnchor, slideIndex: v.slideIndex});
     
                     //needs to be inside the condition to prevent problems with continuousVertical and scrollHorizontally
                     //and to prevent double scroll right after a windows resize
