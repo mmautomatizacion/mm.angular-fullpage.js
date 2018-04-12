@@ -1,5 +1,5 @@
 /*!
- * mm.angular-fullPage 1.3.7
+ * mm.angular-fullPage 1.3.8
  * https://github.com/mmautomatizacion/mm.angular-fullpage.js.git
  * @license MIT licensed
  *
@@ -681,7 +681,7 @@
             * Optional `section` param.
             */
             function moveSlideRight(section){
-                moveSlide('next', section);
+                moveSlide('right', section);
             };
 
             /**
@@ -689,7 +689,7 @@
             * Optional `section` param.
             */
             function moveSlideLeft(section){
-                moveSlide('prev', section);
+                moveSlide('left', section);
             };
 
             /**
