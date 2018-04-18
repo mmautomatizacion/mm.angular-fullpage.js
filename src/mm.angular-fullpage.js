@@ -1997,11 +1997,11 @@
             /**
             * Scrolls to the anchor in the URL when loading the site
             */
-            function scrollToAnchor(){
-                var pathSplit = $location.path().split('/');
-                var sectionAnchor = decodeURIComponent(pathSplit[1]);
-                var slideAnchor = decodeURIComponent(pathSplit[2]);
 
+            function scrollToAnchor(){
+                var anchors =  getAnchorsURL();
+                var sectionAnchor = anchors.section;
+                var slideAnchor = anchors.slide;
 
                 if(sectionAnchor){  //if theres any #
                     if(options.animateAnchor){
@@ -2035,6 +2035,33 @@
                             scrollPageAndSlide(sectionAnchor, slideAnchor);
                         }
                     }
+                }
+            }
+
+            //gets the URL anchors (section and slide)
+            function getAnchorsURL(){
+                var section;
+                var slide;
+                var hash = window.location.hash;
+
+                if(hash.length){
+                    //getting the anchor link in the URL and deleting the `#`
+                    var anchorsParts =  hash.replace('#', '').split('/');
+
+                    //using / for visual reasons and not as a section/slide separator #2803
+                    var isFunkyAnchor = hash.indexOf('#/') > -1;
+
+                    section = isFunkyAnchor ? '/' + anchorsParts[1] : decodeURIComponent(anchorsParts[0]);
+
+                    var slideAnchor = isFunkyAnchor ? anchorsParts[2] : anchorsParts[1];
+                    if(slideAnchor && slideAnchor.length){
+                        slide = decodeURIComponent(slideAnchor);
+                    }
+                }
+
+                return {
+                    section: section,
+                    slide: slide
                 }
             }
 
@@ -2122,8 +2149,9 @@
             //Scrolls the slider to the given slide destination for the given section
             function slideBulletHandler(e){
                 e.preventDefault();
-                var slides = element.closest(SECTION_SEL).find(SLIDES_WRAPPER_SEL);
-                var destiny = slides.find(SLIDE_SEL).eq(element.closest('li').index());
+                var slides = $(this).closest(SECTION_SEL).find(SLIDES_WRAPPER_SEL);
+                var destiny = slides.find(SLIDE_SEL).eq($(this).closest('li').index());
+
                 landscapeScroll(slides, destiny);
             }
 
@@ -2312,7 +2340,7 @@
 
                     addAnimation(slides.find(SLIDES_CONTAINER_SEL)).css(getTransforms(translate3d));
 
-                    afterSlideLoadsId = $timeout(function(){
+                    afterSlideLoadsId = setTimeout(function(){
                         fireCallback && afterSlideLoads(v);
                     }, options.scrollingSpeed, options.easing);
                 }else{
@@ -2586,11 +2614,10 @@
             * Gets a slide inside a given section by its anchor / index
             */
             function getSlideByAnchor(slideAnchor, section){
-                var slides = section.find(SLIDES_WRAPPER_SEL);
-                var slide =  slides.find(SLIDE_SEL + '[data-anchor="'+slideAnchor+'"]');
-
+                var slide = section.find(SLIDE_SEL + '[data-anchor="'+slideAnchor+'"]');
                 if(!slide.length){
-                    slide = slides.find(SLIDE_SEL).eq(slideAnchor);
+                    slideAnchor = typeof slideAnchor !== 'undefined' ? slideAnchor : 0;
+                    slide = section.find(SLIDE_SEL).eq(slideAnchor);
                 }
 
                 return slide;
@@ -2599,26 +2626,23 @@
             /**
             * Scrolls to the given section and slide anchors
             */
-            function scrollPageAndSlide(destiny, slide){
-                var section = getSectionByAnchor(destiny);
+            function scrollPageAndSlide(sectionAnchor, slideAnchor){
+                var section = getSectionByAnchor(sectionAnchor);
 
                 //do nothing if there's no section with the given anchor name
                 if(!section.length) return;
 
-                //default slide
-                if (typeof slide === 'undefined') {
-                    slide = 0;
-                }
+                var slide = getSlideByAnchor(slideAnchor, section);
 
                 //we need to scroll to the section and then to the slide
-                if (destiny !== lastScrolledDestiny && !section.hasClass(ACTIVE)){
+                if (sectionAnchor !== lastScrolledDestiny && !section.hasClass(ACTIVE)){
                     scrollPage(section, function(){
-                        scrollSlider(section, slide);
+                        scrollSlider(slide);
                     });
                 }
                 //if we were already in the section
                 else{
-                    scrollSlider(section, slide);
+                    scrollSlider(slide);
                 }
             }
 
